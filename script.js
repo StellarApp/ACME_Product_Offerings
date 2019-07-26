@@ -59,22 +59,37 @@ Promise.all([fetch(PRODUCT_URL), fetch(COMPANIES_URL), fetch(offerings_URL)])
         const productDivs = document.querySelectorAll(".product");
 
         productDivs.forEach(productDiv => {
+            
             productDiv.addEventListener("click", (ev) => {
-                if (window.location.hash.includes(productDiv.dataset.hash)) {
-                    window.location.hash = ""
-                    productDivs.forEach(div => div.classList.remove("hidden"))
+
+                if(window.location.hash.includes("#")){
+                    window.location = window.location.pathname;
                 } else {
                     window.location.hash = productDiv.dataset.hash;
                 }
             })
-        })
+        });
+
+        // productDivs.forEach(productDiv => {
+        //     productDiv.addEventListener("click", (ev) => {
+        //         if (window.location.hash.includes(productDiv.dataset.hash)) {
+                    
+        //             window.location.hash = ""
+        //             productDivs.forEach(div => div.classList.remove("hidden"))
+        //         } else {
+        //             window.location.hash = productDiv.dataset.hash;
+        //         }
+        //     })
+        // })
     })
 
     window.addEventListener("hashchange", () => {
+
         const hash = window.location.hash.slice(1);
         const productDivs = document.querySelectorAll(".product");
 
         productDivs.forEach(productDiv => {
+
             if (productDiv.dataset.hash !== hash) {
                 productDiv.classList.add("hidden");
             }
